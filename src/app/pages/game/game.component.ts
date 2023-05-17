@@ -60,6 +60,7 @@ export class GameComponent implements OnInit {
     this.points = 0;
     this.errors = 0;
     this.isEndGame = false;
+    this.isLoading = true;
     this.initValidations();
   }
 

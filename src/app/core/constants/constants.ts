@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class Constants {
   public constants = {
+    URL_DATA: 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries',
     GAME_PAGE: {
       NAME: 'Nombre:',
       POINTS: 'Aciertos',
