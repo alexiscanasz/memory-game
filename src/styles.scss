@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Concert+One:regular);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:regular,500,600,700,800,900);
+
+* {
+  font-family: 'Poppins', 'sans-serif';
+}
+
+html {
+  height: 100vh;
+}
+
+html, body {
+  background: #151f38;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #0e1425;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.btn-modyo {
+  color: #151f38;
+  font-weight: 600;
+  background-color: #3dc681;
+  transition: all ease 150ms;
+}
+
+.btn-modyo-dark {
+  color: #3dc681;
+  font-weight: 600;
+  background-color: #151f38;
+  transition: all ease 150ms;
+}
+
+.btn {
+  &:hover {
+    color: #151f38;
+    background-color: #3dc681;
+    border-color: #3dc681;
+    transform: translateY(1.75px);
+  };
+  &:first-child:active, :not(.btn-check)+&:active {
+    color: #151f38;
+    background-color: #3dc681;
+    border-color: #3dc681;
+    transform: translateY(5px);
+  };
+  &:focus-visible {
+    color: #151f38;
+    background-color: #3dc681;
+    border-color: #3dc681;
+    outline: 0;
+  }
+}
+
+.bg-modyo {
+  background-color: #3dc681;
+}
+
+.bg-modyo-dark {
+  background-color: #151f38;
+}
+
+.text-modyo {
+  color: #3dc681;
+}
+
+.text-modyo-dark {
+  color: #151f38;
+}
+
+.modal-content {
+  background-color: #151f38;
+}
