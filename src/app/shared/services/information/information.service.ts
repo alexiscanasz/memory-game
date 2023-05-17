@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InformationService {
-  urlData = ' https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=15';
+  urlData = 'https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=15';
 
   constructor(
     private http: HttpClient

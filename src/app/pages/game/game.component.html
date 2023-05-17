@@ -1,15 +1,14 @@
 <section class="row m-1 p-1">
+  <div class="col-12 px-2">
+    <div class="background-custom h-100 m-0 px-2 py-3 rounded-3 shadow d-flex justify-content-center animate__animated animate__fadeIn animate__faster">
 
-  <div class="col-12 px-2 ">
-    <div class="h-100 m-0 px-2 py-3 bg-modyo rounded-3 shadow d-flex justify-content-center">
-
-      <div class="player-name-box shadow rounded-3 px-3 py-2 d-flex flex-column justify-content-center me-3">
+      <div class="playername shadow rounded-3 px-3 py-2 d-flex flex-column justify-content-center me-3">
         <h4 class="text-center">
           <span class="fw-bold d-inline-block my-1 me-1">
             <i class="fas fa-user-astronaut fa-fw"></i>
-            Nombre:
+            {{ copies.NAME }}
           </span>
-          <div class="player-name shadow rounded-3 py-1 px-2 text-uppercase" (click)="editPlayerName()">
+          <div class="playername__name shadow rounded-3 py-1 px-2 text-uppercase" (click)="editPlayerName()">
             <i class="far fa-pen-to-square fa-fade fa-xs fa-fw"></i>
             {{playerName ? playerName : 'Sin nombre'}}
           </div>
@@ -17,45 +16,45 @@
       </div>
 
       <div class="score shadow rounded-3 text-center px-3 py-2 d-flex justify-content-center flex-column">
-        <div class="accerts d-flex flex-row justify-content-end mb-1">
+        <div class="score__points d-flex flex-row justify-content-end mb-1">
           <p class="my-0 me-1 fw-bold text-uppercase">
-            Aciertos
+            {{ copies.POINTS }}
           </p>
           <span class="rounded-1 px-2 text-white bg-success rounded-3 shadow">
-            {{points}}
+            {{ points }}
           </span>
         </div>
-        <div class="errors d-flex flex-row justify-content-end">
+        <div class="score__errors d-flex flex-row justify-content-end">
           <p class="my-0 me-1 fw-bold text-uppercase">
-            Errores
+            {{ copies.ERRORS }}
           </p>
           <span class="rounded-1 px-2 text-white bg-danger rounded-3 shadow">
             {{errors}}
           </span>
         </div>
-        <button *ngIf="isEndGame" type="button" class="btn btn-modyo-dark btn-sm shadow mt-1 text-uppercase fw-bold rounded-2" (click)="startNewCardsGame()">
+        <button *ngIf="isEndGame" type="button" class="btn btn-custom--dark btn-sm shadow mt-1 text-uppercase fw-bold rounded-2" (click)="startNewCardsGame()">
           <i class="fas fa-rotate fa-fw fa-fade"></i>
-          Nuevo juego
+          {{ copies.NEW_GAME }}
         </button>
       </div>
 
     </div>
   </div>
-
 </section>
 
-<section id="gameCards" class="row game p-2 animate__animated animate__fadeIn animate__faster">
+<app-loader *ngIf="isLoading"></app-loader>
 
-    <div class="col-12 p-1 d-flex justify-content-center flex-wrap align-items-start">
-      <div *ngFor="let cardData of cardsData; let i = index"
-           id="card{{i}}"
-           [attr.data-uuid]="cardData.meta.uuid"
-           [class]="['img-container', 'bg-dark', 'rounded-3', 'm-2', 'shadow']"
-           (click)="clickOnCard($event)">
-        <img class="animal-img"
-             [src]="cardData.fields.image.url"
-             [alt]="cardData.fields.image.title">
-      </div>
+<section id="gameCardsGrid" class="game-card-grid row p-2 animate__animated animate__fadeIn animate__fast">
+  <div class="col-12 p-1 d-flex justify-content-center flex-wrap align-items-start">
+    <div *ngFor="let cardData of cardsData; let index = index"
+         id="card-{{index}}"
+         [attr.data-uuid]="cardData.meta.uuid"
+         [class]="['image-container', 'bg-dark', 'rounded-3', 'm-2', 'shadow']"
+         (click)="selectCard($event)">
+      <img class="image-container__image"
+           [src]="cardData.fields.image.url"
+           [alt]="cardData.fields.image.title"
+           [title]="cardData.fields.image.title">
     </div>
-
+  </div>
 </section>

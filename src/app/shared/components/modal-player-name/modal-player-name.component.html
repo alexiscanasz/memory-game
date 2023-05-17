@@ -1,14 +1,14 @@
 <div class="modal-header border-0">
   <h5 class="modal-title text-white" id="savePlayerNameModalLabel">
-    Ingresa tu nombre
+    {{ copies.ENTER_YOUR_NAME }}
   </h5>
-  <button type="button" class="btn btn-modyo" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times fa-fw"></i>
+  <button type="button" class="btn btn-custom" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+    <i class="btn-custom__icon fas fa-times fa-fw"></i>
   </button>
 </div>
 <div class="modal-body pb-0">
   <div class="input-group px-3">
-    <span class="input-group-text bg-modyo text-modyo-dark border-0" id="basic-addon1">
+    <span class="text-custom--dark input-group-text background-custom border-0">
       <i class="fas fa-user-astronaut fa-fw"></i>
     </span>
     <input ngbAutofocus type="text" class="form-control" placeholder="Nombre" aria-label="playername" aria-describedby="player name" [value]="actualPlayerName" #playerName (keyup.enter)="savePlayerName(playerName.value)">
@@ -17,10 +17,10 @@
 <div class="modal-footer border-0 justify-content-center pt-0 pb-3">
   <span *ngIf="showBadgeError" class="badge bg-danger">
     <i class="fas fa-times fa-fw fa-fade"></i>
-    Por favor, ingresa un nombre valido
+    {{ copies.ERROR_INPUT }}
   </span>
-  <button type="button" class="btn btn-modyo mt-3" (click)="savePlayerName(playerName.value)">
-    <i class="fas fa-save fa-fw fa-fade"></i>
-    Guardar nombre de jugador
+  <button type="button" class="btn btn-custom mt-3" (click)="savePlayerName(playerName.value)">
+    <i class="btn-custom__icon fas fa-save fa-fw fa-fade"></i>
+    {{ copies.SAVE_PLAYER_NAME }}
   </button>
 </div>

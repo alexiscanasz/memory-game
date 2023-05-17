@@ -24,14 +24,14 @@ h1, h2, h3, h4, h5 {
   box-shadow: none;
 }
 
-.btn-modyo {
+.btn-custom {
   color: #151f38;
   font-weight: 600;
   background-color: #3dc681;
   transition: all ease 150ms;
 }
 
-.btn-modyo-dark {
+.btn-custom--dark {
   color: #3dc681;
   font-weight: 600;
   background-color: #151f38;
@@ -59,19 +59,19 @@ h1, h2, h3, h4, h5 {
   }
 }
 
-.bg-modyo {
+.background-custom {
   background-color: #3dc681;
 }
 
-.bg-modyo-dark {
+.background-custom-dark {
   background-color: #151f38;
 }
 
-.text-modyo {
+.text-custom {
   color: #3dc681;
 }
 
-.text-modyo-dark {
+.text-custom--dark {
   color: #151f38;
 }
 

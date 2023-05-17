@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Constants } from 'src/app/core/constants/constants';
 
 @Component({
   selector: 'app-modal-player-name',
@@ -7,12 +8,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-player-name.component.scss']
 })
 export class ModalPlayerNameComponent {
+  copies: any;
   actualPlayerName: string;
   showBadgeError: boolean;
 
   constructor(
-    public modalService: NgbActiveModal
+    public modalService: NgbActiveModal,
+    public constants: Constants
   ) {
+    this.copies = this.constants.constants.PLAYERNAME_MODAL;
     this.actualPlayerName = '';
     this.showBadgeError = false;
   }

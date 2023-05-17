@@ -1,1 +1,14 @@
-<p>page-not-found works!</p>
+<div class="row">
+  <div class="col-12 d-flex flex-wrap justify-content-center pt-5 px-1 pb-1 animate__animated animate__fadeInDown animate_faster">
+    <h1 class="text-custom text-center mb-3 w-100">{{ copies.PAGE_NOT_EXITS}}</h1>
+    <div class="page-not-found p-2 rounded-3 text-center w-100">
+      <img src="assets/404.webp"
+           class="page-not-found__image background-custom p-2 rounded-2"
+           alt="Page not found image">
+    </div>
+    <a type="button" class="btn btn-custom fw-bold shadow-lg d-block mt-3" [routerLink]="'/home'">
+      <i class="fas fa-arrow-alt-circle-left fa-fade fa-fw"></i>
+      {{ copies.BACK_BUTTON }}
+    </a>
+  </div>
+</div>

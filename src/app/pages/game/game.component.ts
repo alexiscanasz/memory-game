@@ -5,6 +5,8 @@ import { ModalPlayerNameComponent } from 'src/app/shared/components/modal-player
 import { Entry, ICardsData } from 'src/app/core/interfaces/cards-data';
 import { ModalEndGameComponent } from 'src/app/shared/components/modal-end-game/modal-end-game.component';
 import { StateService } from 'src/app/shared/services/state/state.service';
+import { Observable, Subject } from 'rxjs';
+import { Constants } from 'src/app/core/constants/constants';
 
 @Component({
   selector: 'app-game',
@@ -19,12 +21,15 @@ export class GameComponent implements OnInit {
   errors: number;
   numberOfCards: number;
   isEndGame: boolean;
-  startNewGame$: any;
+  startNewGame$: Observable<boolean> | undefined;
   startNewGame: boolean;
+  isLoading: boolean;
+  copies: any;
 
   constructor(
     private informationService: InformationService,
     private stateService: StateService,
+    public constants: Constants,
     public modalService: NgbModal,
   ) {
     this.numberOfCards = 0;
@@ -32,8 +37,10 @@ export class GameComponent implements OnInit {
     this.points = 0;
     this.errors = 0;
     this.cardsData = [];
+    this.isLoading = true;
     this.isEndGame = false;
     this.startNewGame = false;
+    this.copies = this.constants.constants.GAME_PAGE;
   }
 
   ngOnInit(): void {
@@ -47,6 +54,13 @@ export class GameComponent implements OnInit {
     this.hideGameCards();
     this.getCardsImages();
     this.validatePlayerName();
+  }
+
+  startNewCardsGame(): void {
+    this.points = 0;
+    this.errors = 0;
+    this.isEndGame = false;
+    this.initValidations();
   }
 
   validatePlayerName(): void {
@@ -68,11 +82,9 @@ export class GameComponent implements OnInit {
   }
 
   editPlayerName(): void {
-    this.modalService.open(ModalPlayerNameComponent, { centered: true }).result.then(() => {
-      this.validatePlayerName();
-    }).catch(() => {
-      console.log('Ngb: modal closed');
-    });
+    this.modalService.open(ModalPlayerNameComponent, { centered: true }).result
+    .then(() => this.validatePlayerName())
+    .catch(() => this.validatePlayerName());
   }
 
   getPlayerName(): string {
@@ -85,35 +97,39 @@ export class GameComponent implements OnInit {
 
   getCardsImages(): void {
     this.informationService.getAnimalsData().subscribe((resp: ICardsData) => {
-        this.cardsData = resp.entries;
-        this.numberOfCards = this.cardsData.length;
-        this.showGameCards();
-        this.duplicateAnimals();
+        setTimeout(() => {
+          this.cardsData = resp.entries;
+          this.numberOfCards = this.cardsData.length;
+          this.isLoading = false;
+          this.showGameCards();
+          this.duplicateCards();
+        }, 1000)
       }
     );
   }
 
   showGameCards(): void {
-    const gameCards = document.getElementById('gameCards');
+    const gameCards = document.getElementById('gameCardsGrid');
     (gameCards as HTMLElement).style.display = 'block';
   }
 
   hideGameCards(): void {
-    const gameCards = document.getElementById('gameCards');
+    const gameCards = document.getElementById('gameCardsGrid');
     (gameCards as HTMLElement).style.display = 'none';
   }
 
-  duplicateAnimals(): void {
+  duplicateCards(): void {
     const duplicatedArray = this.cardsData.slice();
     this.cardsData = this.cardsData.concat(duplicatedArray);
-    this.sortAnimals();
+    this.shuffleCards();
   }
 
-  sortAnimals(): void {
+  shuffleCards(): void {
     this.cardsData = this.cardsData.sort(() => Math.random() - 0.5);
   }
 
-  clickOnCard(event: Event): void {
+  selectCard(event: Event): void {
+    if ((event.target as HTMLElement).classList.contains('card-found')) return;
     this.revealCard((event.target as HTMLElement));
     if (!!this.cardSelected) {
       return this.validateCards(event);
@@ -121,10 +137,10 @@ export class GameComponent implements OnInit {
     this.cardSelected = {
       id: (event.target as HTMLElement).id,
       uuid: (event.target as HTMLElement).dataset['uuid'],
-    }
+    };
   }
 
-  revealCard(cardElement: any): void {
+  revealCard(cardElement: HTMLElement): void {
     cardElement.classList.add('no-after');
   }
 
@@ -132,12 +148,13 @@ export class GameComponent implements OnInit {
     cardElement.classList.remove('no-after');
   }
 
-  validateCards(event: any): void {
-    if ((event.target as HTMLElement).id === this.cardSelected.id) {
-      return alert('Selecciona una carta diferente');
-    }
+  validateCards(event: HTMLElement | any): void {
+    if ((event.target as HTMLElement).id === this.cardSelected.id) return;
 
     if ((event.target as HTMLElement).dataset['uuid'] === this.cardSelected.uuid) {
+      const firstCardSelected = document.getElementById(this.cardSelected.id);
+      firstCardSelected!.classList.add('card-found');
+      (event.target as HTMLElement).classList.add('card-found');
       this.cardSelected = null;
       this.revealCard((event.target as HTMLElement))
       this.points++;
@@ -161,12 +178,5 @@ export class GameComponent implements OnInit {
         console.log('Ngb: modal closed');
       })
     }
-  }
-
-  startNewCardsGame(): void {
-    this.points = 0;
-    this.errors = 0;
-    this.isEndGame = false;
-    this.initValidations();
   }
 }

@@ -1,21 +1,21 @@
 <div class="modal-header border-0">
-  <h5 class="modal-title text-white text-center w-100" id="savePlayerNameModalLabel">
-    Felicidades
+  <h5 class="modal-title text-white text-center w-100" id="endGameModalLabel">
+    {{ copies.CONGRATS }}
     <span class="text-capitalize">{{actualPlayerName}}, </span>
-    <span class="fw-bolder text-uppercase">¡GANASTE!</span>
+    <span class="fw-bolder text-uppercase">{{ copies.YOU_WIN }}</span>
   </h5>
-  <button type="button" class="btn btn-modyo" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times fa-fw"></i>
+  <button type="button" class="btn btn-custom" data-bs-dismiss="modal" aria-label="Close modal end game" (click)="closeModal()">
+    <i class="btn-custom__icon fas fa-times fa-fw"></i>
   </button>
 </div>
 <div class="modal-body pb-0">
-  <div class="end-game-gif animate__animated animate__fadeIn rounded-3 overflow-hidden">
-    <img class="w-100" src="assets/celebrate.webp"/>
+  <div class="endgame-gif animate__animated animate__fadeIn rounded-3 overflow-hidden">
+    <img class="endgame-gif__image w-100" src="assets/celebrate.webp" alt="End game page image">
   </div>
 </div>
 <div class="modal-footer border-0 justify-content-center pt-0 pb-3">
-  <button type="button" class="btn btn-modyo mt-3 text-uppercase fw-bolder" (click)="startNewGame()">
-    <i class="fas fa-rotate fa-fw fa-fade"></i>
-    ¿Quieres volver a jugar?
+  <button type="button" class="btn btn-custom mt-3 text-uppercase fw-bolder" (click)="startNewGame()">
+    <i class="btn-custom__icon fas fa-rotate fa-fw fa-fade"></i>
+    {{ copies.PLAY_AGAIN }}
   </button>
 </div>
