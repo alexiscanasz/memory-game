@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalEndGameComponent } from './modal-end-game.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ModalEndGameComponent', () => {
   let component: ModalEndGameComponent;
@@ -8,7 +9,10 @@ describe('ModalEndGameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalEndGameComponent ]
+      declarations: [ ModalEndGameComponent ],
+      providers: [
+        NgbActiveModal
+      ]
     })
     .compileComponents();
 

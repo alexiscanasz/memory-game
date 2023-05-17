@@ -7,17 +7,18 @@ import { GameComponent } from './pages/game/game.component';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    GameComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule,
+    RouterModule,
     SharedModule,
+    PagesModule,
     NgbModule
   ],
   providers: [],

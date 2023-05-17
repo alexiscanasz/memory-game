@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalPlayerNameComponent } from './modal-player-name.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ModalPlayerNameComponent', () => {
   let component: ModalPlayerNameComponent;
@@ -8,7 +9,10 @@ describe('ModalPlayerNameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalPlayerNameComponent ]
+      declarations: [ ModalPlayerNameComponent ],
+      providers: [
+        NgbActiveModal
+      ]
     })
     .compileComponents();
 

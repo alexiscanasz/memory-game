@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalPlayerNameComponent } from './components/modal-player-name/modal-player-name.component';
 import { ModalEndGameComponent } from './components/modal-end-game/modal-end-game.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +16,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     ModalPlayerNameComponent,
